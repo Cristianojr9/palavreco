@@ -1,6 +1,8 @@
 import { useCallback, useState } from 'react';
 import { LetterState } from '../components/GameBoard';
 import { getRandomWord, isValidWord } from '../data/words';
+import { useHaptics } from './useHaptics';
+import { useSounds } from './useSounds';
 
 export interface GameState {
   guesses: LetterState[][];
@@ -12,6 +14,9 @@ export interface GameState {
 }
 
 export const useWordleGame = () => {
+  const haptics = useHaptics();
+  const sounds = useSounds();
+  
   const [gameState, setGameState] = useState<GameState>(() => {
     const targetWord = getRandomWord();
     return {
@@ -84,25 +89,30 @@ export const useWordleGame = () => {
     // Verificar se a letra já foi marcada como ausente em tentativas anteriores
     const letterState = gameState.keyStates[letter.toUpperCase()];
     if (letterState === 'absent') {
+      haptics.playError();
       return; // Não permitir adicionar letras que já foram marcadas como ausentes
     }
 
+    haptics.playKeyPress();
+    sounds.playKeyPress();
     setGameState(prev => ({
       ...prev,
       currentGuess: prev.currentGuess + letter.toUpperCase(),
     }));
-  }, [gameState.gameStatus, gameState.currentGuess.length, gameState.keyStates]);
+  }, [gameState.gameStatus, gameState.currentGuess.length, gameState.keyStates, haptics, sounds]);
 
   const removeLetter = useCallback(() => {
     if (gameState.gameStatus !== 'playing' || gameState.currentGuess.length === 0) {
       return;
     }
 
+    haptics.playKeyPress();
+    sounds.playKeyPress();
     setGameState(prev => ({
       ...prev,
       currentGuess: prev.currentGuess.slice(0, -1),
     }));
-  }, [gameState.gameStatus, gameState.currentGuess.length]);
+  }, [gameState.gameStatus, gameState.currentGuess.length, haptics, sounds]);
 
   const submitGuess = useCallback(() => {
     if (gameState.gameStatus !== 'playing' || 
@@ -120,6 +130,24 @@ export const useWordleGame = () => {
     
     const evaluatedGuess = evaluateGuess(guess, gameState.targetWord);
     
+    // Tocar sons baseados no resultado
+    evaluatedGuess.forEach(({ status }) => {
+      switch (status) {
+        case 'correct':
+          haptics.playCorrect();
+          sounds.playCorrect();
+          break;
+        case 'present':
+          haptics.playPresent();
+          sounds.playPresent();
+          break;
+        case 'absent':
+          haptics.playAbsent();
+          sounds.playAbsent();
+          break;
+      }
+    });
+    
     setGameState(prev => {
       const newGuesses = [...prev.guesses];
       newGuesses[prev.currentRow] = evaluatedGuess;
@@ -130,8 +158,12 @@ export const useWordleGame = () => {
       let newGameStatus: 'playing' | 'won' | 'lost' = 'playing';
       if (isCorrect) {
         newGameStatus = 'won';
+        haptics.playWin();
+        sounds.playWin();
       } else if (isLastRow) {
         newGameStatus = 'lost';
+        haptics.playLose();
+        sounds.playLose();
       }
       
       return {

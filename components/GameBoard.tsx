@@ -31,37 +31,37 @@ export const GameBoard: React.FC<GameBoardProps> = ({
     // Animar entrada da letra
     useEffect(() => {
       if (displayLetter && isCurrentGuess) {
-        Animated.sequence([
-          Animated.timing(animatedValue, {
-            toValue: 1,
-            duration: 200,
-            useNativeDriver: true,
-          }),
-        ]).start();
+        Animated.timing(animatedValue, {
+          toValue: 1,
+          duration: 150,
+          useNativeDriver: true,
+        }).start();
       }
     }, [displayLetter, isCurrentGuess, animatedValue]);
 
-    // Animar mudança de status
+    // Animar mudança de status com delay baseado na posição
     useEffect(() => {
       if (status !== 'empty' && !isCurrentGuess) {
-        Animated.sequence([
-          Animated.timing(animatedValue, {
-            toValue: 0.5,
-            duration: 100,
-            useNativeDriver: true,
-          }),
+        const delay = col * 150; // Delay progressivo para cada letra
+        
+        setTimeout(() => {
           Animated.timing(animatedValue, {
             toValue: 1,
-            duration: 200,
+            duration: 300,
             useNativeDriver: true,
-          }),
-        ]).start();
+          }).start();
+        }, delay);
       }
-    }, [status, isCurrentGuess, animatedValue]);
+    }, [status, isCurrentGuess, animatedValue, col]);
 
     const scale = animatedValue.interpolate({
-      inputRange: [0, 0.5, 1],
-      outputRange: [0.8, 1.1, 1],
+      inputRange: [0, 1],
+      outputRange: [0.9, 1],
+    });
+
+    const opacity = animatedValue.interpolate({
+      inputRange: [0, 1],
+      outputRange: [0.7, 1],
     });
 
     return (
@@ -73,10 +73,18 @@ export const GameBoard: React.FC<GameBoardProps> = ({
           status === 'present' && styles.present,
           status === 'absent' && styles.absent,
           isCurrentGuess && displayLetter && styles.currentGuess,
-          { transform: [{ scale }] },
+          { 
+            transform: [{ scale }],
+            opacity,
+          },
         ]}
       >
-        <Text style={styles.letter}>{displayLetter.toUpperCase()}</Text>
+        <Text style={[
+          styles.letter,
+          status === 'correct' && styles.letterCorrect,
+          status === 'present' && styles.letterPresent,
+          status === 'absent' && styles.letterAbsent,
+        ]}>{displayLetter.toUpperCase()}</Text>
       </Animated.View>
     );
   };
@@ -130,6 +138,22 @@ const styles = StyleSheet.create({
     fontSize: 28,
     fontWeight: 'bold',
     fontFamily: 'System',
+  },
+  letterCorrect: {
+    color: '#ffffff',
+    textShadowColor: 'rgba(255, 255, 255, 0.5)',
+    textShadowOffset: { width: 0, height: 0 },
+    textShadowRadius: 4,
+  },
+  letterPresent: {
+    color: '#ffffff',
+    textShadowColor: 'rgba(255, 255, 255, 0.3)',
+    textShadowOffset: { width: 0, height: 0 },
+    textShadowRadius: 2,
+  },
+  letterAbsent: {
+    color: '#ffffff',
+    opacity: 0.8,
   },
   correct: {
     backgroundColor: '#538d4e',

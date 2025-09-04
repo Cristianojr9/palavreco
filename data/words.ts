@@ -1,6 +1,6 @@
 // Lista de palavras em português de 5 letras
 export const WORDS_5_LETTERS = [
-  'ABRIR', 'AMIGO', 'AMOR', 'ANIMA', 'APOIO', 'AROMA', 'ATIVO', 'AUDIO', 'AUTOR',
+  'ABRIR', 'AMIGO', 'BAILE', 'ANIMA', 'APOIO', 'AROMA', 'ATIVO', 'AUDIO', 'AUTOR',
   'BANCO', 'BARCO', 'ETICA', 'CINTO', 'BICHO', 'BOCAL', 'BORDA', 'BRASA', 'BRUTO',
   'CASAL', 'CAUSA', 'CHAVE', 'CHUVA', 'CINCO', 'CLIMA', 'COBRA', 'CORPO', 'CULPA',
   'DADOS', 'DENTE', 'DICAS', 'DIGNO', 'DIVAS', 'DOBRA', 'DORME', 'DUPLO', 'DURAR',
@@ -30,7 +30,7 @@ export const VALID_WORDS = [
   // Adicionar mais palavras válidas aqui se necessário
   'ARDIL', 'ETNIA', 'ARDEI', 'INVIA', 'SAGAZ', 'NOBRE', 'POLVO', 'PLANO', 'OLHOS',
   'AREIA', 'GAMBA', 'PERNA', 'PONTE', 'CILIO', 'TRIGO', 'CAIXA', 'ROUPA', 'VEZES',
-  'MOITA'
+  'MOITA', 'PORTA', 'SAUDE', 'GOSMA', 'GOSTO'
 ];
 
 export const getRandomWord = (): string => {
