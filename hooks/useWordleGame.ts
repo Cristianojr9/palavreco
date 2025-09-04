@@ -81,11 +81,17 @@ export const useWordleGame = () => {
       return;
     }
 
+    // Verificar se a letra já foi marcada como ausente em tentativas anteriores
+    const letterState = gameState.keyStates[letter.toUpperCase()];
+    if (letterState === 'absent') {
+      return; // Não permitir adicionar letras que já foram marcadas como ausentes
+    }
+
     setGameState(prev => ({
       ...prev,
       currentGuess: prev.currentGuess + letter.toUpperCase(),
     }));
-  }, [gameState.gameStatus, gameState.currentGuess.length]);
+  }, [gameState.gameStatus, gameState.currentGuess.length, gameState.keyStates]);
 
   const removeLetter = useCallback(() => {
     if (gameState.gameStatus !== 'playing' || gameState.currentGuess.length === 0) {

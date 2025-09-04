@@ -15,6 +15,14 @@ export const WordleGame: React.FC = () => {
     if (gameState.gameStatus !== 'playing') {
       return;
     }
+    
+    // Verificar se a letra já foi marcada como ausente
+    const letterState = gameState.keyStates[key.toUpperCase()];
+    if (letterState === 'absent') {
+      Alert.alert('Letra já usada', 'Esta letra já foi marcada como ausente em tentativas anteriores!');
+      return;
+    }
+    
     addLetter(key);
   };
 
