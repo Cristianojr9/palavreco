@@ -107,17 +107,17 @@ export const GameBoard: React.FC<GameBoardProps> = ({
 const styles = StyleSheet.create({
   board: {
     alignItems: 'center',
-    marginVertical: 20,
+    marginVertical: 15,
     paddingHorizontal: 20,
   },
   row: {
     flexDirection: 'row',
-    marginBottom: 8,
-    gap: 8,
+    marginBottom: 6,
+    gap: 6,
   },
   cell: {
-    width: 62,
-    height: 62,
+    width: 50,
+    height: 50,
     borderWidth: 2,
     borderColor: '#3a3a3c',
     justifyContent: 'center',
@@ -135,7 +135,7 @@ const styles = StyleSheet.create({
   },
   letter: {
     color: '#ffffff',
-    fontSize: 28,
+    fontSize: 22,
     fontWeight: 'bold',
     fontFamily: 'System',
   },

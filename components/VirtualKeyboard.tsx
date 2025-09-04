@@ -57,16 +57,16 @@ export const VirtualKeyboard: React.FC<VirtualKeyboardProps> = ({
 
   return (
     <View style={styles.keyboard}>
-      <View style={styles.row}>
+      <View style={[styles.row, styles.topRow]}>
         {topRow.map(renderKey)}
       </View>
       
-      <View style={styles.row}>
+      <View style={[styles.row, styles.middleRow]}>
         {middleRow.map(renderKey)}
         {renderSpecialKey('⌫', onBackspace, styles.backspaceKey)}
       </View>
       
-      <View style={styles.row}>
+      <View style={[styles.row, styles.bottomRow]}>
         {renderSpecialKey('ENTER', onEnter, styles.enterKey)}
         {bottomRow.map(renderKey)}
       </View>
@@ -77,34 +77,42 @@ export const VirtualKeyboard: React.FC<VirtualKeyboardProps> = ({
 const styles = StyleSheet.create({
   keyboard: {
     alignItems: 'center',
-    paddingHorizontal: 20,
-    paddingBottom: 20,
+    paddingHorizontal: 4,
+    paddingBottom: 8,
+    paddingTop: 4,
+    width: '100%',
   },
   row: {
     flexDirection: 'row',
-    marginBottom: 8,
+    marginBottom: 3,
     justifyContent: 'center',
-    gap: 6,
+    gap: 2,
+    width: '100%',
+    paddingHorizontal: 2,
   },
   key: {
     backgroundColor: '#818384',
-    paddingVertical: 14,
-    paddingHorizontal: 10,
+    paddingVertical: 10,
+    paddingHorizontal: 2,
     borderRadius: 6,
-    minWidth: 36,
+    flex: 1,
+    maxWidth: 35,
+    height: 45,
     alignItems: 'center',
+    justifyContent: 'center',
+    marginHorizontal: 1,
     shadowColor: '#000',
     shadowOffset: {
       width: 0,
       height: 1,
     },
     shadowOpacity: 0.2,
-    shadowRadius: 1.41,
-    elevation: 2,
+    shadowRadius: 1,
+    elevation: 1,
   },
   keyText: {
     color: '#ffffff',
-    fontSize: 16,
+    fontSize: 14,
     fontWeight: 'bold',
     fontFamily: 'System',
   },
@@ -122,29 +130,46 @@ const styles = StyleSheet.create({
   },
   specialKey: {
     backgroundColor: '#818384',
-    paddingVertical: 14,
-    paddingHorizontal: 10,
+    paddingVertical: 10,
+    paddingHorizontal: 4,
     borderRadius: 6,
     alignItems: 'center',
+    justifyContent: 'center',
+    height: 45,
+    marginHorizontal: 1,
     shadowColor: '#000',
     shadowOffset: {
       width: 0,
       height: 1,
     },
     shadowOpacity: 0.2,
-    shadowRadius: 1.41,
-    elevation: 2,
+    shadowRadius: 1,
+    elevation: 1,
   },
   specialKeyText: {
     color: '#ffffff',
-    fontSize: 14,
+    fontSize: 11,
     fontWeight: 'bold',
     fontFamily: 'System',
   },
   backspaceKey: {
-    minWidth: 50,
+    flex: 1.5,
+    maxWidth: 50,
   },
   enterKey: {
-    minWidth: 70,
+    flex: 2,
+    maxWidth: 80,
+  },
+  topRow: {
+    marginBottom: 4,
+    paddingHorizontal: 8,
+  },
+  middleRow: {
+    marginBottom: 4,
+    paddingHorizontal: 4,
+  },
+  bottomRow: {
+    marginBottom: 0,
+    paddingHorizontal: 0,
   },
 });
