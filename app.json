@@ -1,22 +1,35 @@
 {
   "expo": {
     "name": "Palavreco",
-    "slug": "Palavreco",
+    "slug": "palavreco",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "scheme": "palavreco",
-    "userInterfaceStyle": "automatic",
+    "userInterfaceStyle": "dark",
     "newArchEnabled": true,
+    "description": "Descubra a palavra do dia! Um jogo de adivinhação de palavras em português, inspirado no Wordle. Teste seu vocabulário e divirta-se!",
+    "keywords": ["palavra", "wordle", "jogo", "português", "adivinhação", "vocabulário"],
+    "privacy": "public",
+    "category": "games",
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.palavreco.app",
+      "buildNumber": "1",
+      "infoPlist": {
+        "CFBundleDisplayName": "Palavreco",
+        "NSUserTrackingUsageDescription": "Este app não coleta dados pessoais ou rastreia usuários."
+      }
     },
     "android": {
+      "package": "com.palavreco.app",
+      "versionCode": 1,
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
+        "backgroundColor": "#121213"
       },
-      "edgeToEdgeEnabled": true
+      "edgeToEdgeEnabled": true,
+      "permissions": []
     },
     "web": {
       "bundler": "metro",
@@ -31,7 +44,7 @@
           "image": "./assets/images/splash-icon.png",
           "imageWidth": 200,
           "resizeMode": "contain",
-          "backgroundColor": "#ffffff"
+          "backgroundColor": "#121213"
         }
       ]
     ],

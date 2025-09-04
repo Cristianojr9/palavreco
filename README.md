@@ -1,50 +1,108 @@
-# Welcome to your Expo app 👋
+# 🎮 Palavreco
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+Um jogo de adivinhação de palavras em português, inspirado no Wordle. Teste seu vocabulário e divirta-se descobrindo a palavra do dia!
 
-## Get started
+## ✨ Características
 
-1. Install dependencies
+- 🎯 **6 tentativas** para descobrir a palavra de 5 letras
+- 🎨 **Feedback visual** com cores intuitivas
+- 🔊 **Sons e vibrações** para uma experiência imersiva
+- 🎵 **Música de fundo** relaxante
+- 📱 **Design responsivo** para todas as telas
+- 🌙 **Tema escuro** elegante
+- 🇧🇷 **Palavras em português** do Brasil
 
-   ```bash
-   npm install
-   ```
+## 🚀 Como Jogar
 
-2. Start the app
+1. Digite uma palavra de 5 letras
+2. Pressione ENTER para submeter
+3. Use as cores como dicas:
+   - 🟩 **Verde**: Letra correta na posição correta
+   - 🟨 **Amarelo**: Letra correta na posição errada
+   - ⬜ **Cinza**: Letra não está na palavra
+4. Tente acertar em até 6 tentativas!
 
-   ```bash
-   npx expo start
-   ```
+## 🛠️ Desenvolvimento
 
-In the output, you'll find options to open the app in a
+### Pré-requisitos
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+- Node.js 18+
+- npm ou yarn
+- Expo CLI
+- EAS CLI (para builds)
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
+### Instalação
 
 ```bash
-npm run reset-project
+# Clone o repositório
+git clone https://github.com/seu-usuario/palavreco.git
+cd palavreco
+
+# Instale as dependências
+npm install
+
+# Inicie o projeto
+npx expo start
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+### Build para Produção
 
-## Learn more
+```bash
+# Instale o EAS CLI
+npm install -g @expo/eas-cli
 
-To learn more about developing your project with Expo, look at the following resources:
+# Configure o projeto
+eas build:configure
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+# Build para Android
+eas build --platform android
 
-## Join the community
+# Build para iOS
+eas build --platform ios
+```
 
-Join our community of developers creating universal apps.
+## 📱 Publicação
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+### App Store (iOS)
+- Bundle ID: `com.palavreco.app`
+- Categoria: Games > Word
+- Classificação: 4+ (Everyone)
+
+### Google Play (Android)
+- Package: `com.palavreco.app`
+- Categoria: Games > Word
+- Classificação: Everyone
+
+## 🔒 Privacidade
+
+Este app **NÃO coleta dados pessoais**. Funciona completamente offline e não rastreia usuários. Veja nossa [Política de Privacidade](PRIVACY_POLICY.md) para mais detalhes.
+
+## 🎨 Assets Necessários
+
+Para publicação, você precisará de:
+
+- **Ícone do app**: 1024x1024px (iOS), 512x512px (Android)
+- **Screenshots**: 6.7", 6.5", 5.5" (iPhone), 12.9", 11" (iPad)
+- **Ícone adaptativo**: 1024x1024px com fundo transparente
+
+## 📄 Licença
+
+MIT License - veja o arquivo [LICENSE](LICENSE) para detalhes.
+
+## 🤝 Contribuição
+
+Contribuições são bem-vindas! Sinta-se à vontade para:
+
+- Reportar bugs
+- Sugerir melhorias
+- Enviar pull requests
+- Adicionar novas palavras ao dicionário
+
+## 📞 Contato
+
+- Email: contato@palavreco.com
+- Website: www.palavreco.com
+
+---
+
+**Palavreco** - Descubra a palavra do dia! 🎯
