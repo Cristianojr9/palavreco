@@ -31,7 +31,8 @@ export const VALID_WORDS = [
   'ARDIL', 'ETNIA', 'ARDEI', 'INVIA', 'SAGAZ', 'NOBRE', 'POLVO', 'PLANO', 'OLHOS',
   'AREIA', 'GAMBA', 'PERNA', 'PONTE', 'CILIO', 'TRIGO', 'CAIXA', 'ROUPA', 'VEZES',
   'MOITA', 'PORTA', 'SAUDE', 'GOSMA', 'GOSTO', 'GESTO', 'JEITO', 'TRONO', 'CESTA', 
-  'SITIO', 'CURSO', 'RINHA', 'PERNA', 'FAROL', 'TRONO', 'TRONO', 'GRILO', 'TERNO'
+  'SITIO', 'CURSO', 'RINHA', 'PERNA', 'FAROL', 'TRONO', 'TRONO', 'GRILO', 'TERNO', 
+  'FEITA', 'SAUNA', 'PRATA'
 ];
 
 export const getRandomWord = (): string => {

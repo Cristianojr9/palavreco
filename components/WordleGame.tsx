@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Alert, StyleSheet, Text, View } from 'react-native';
 import { isValidWord } from '../data/words';
+import { useSounds } from '../hooks/useSounds';
 import { useWordleGame } from '../hooks/useWordleGame';
 import { GameBoard } from './GameBoard';
 import { GameModal } from './GameModal';
@@ -8,6 +9,7 @@ import { VirtualKeyboard } from './VirtualKeyboard';
 
 export const WordleGame: React.FC = () => {
   const { gameState, addLetter, removeLetter, submitGuess, resetGame } = useWordleGame();
+  const { playBackgroundMusic, stopBackgroundMusic } = useSounds();
   const [showModal, setShowModal] = useState(false);
   const [previousGameStatus, setPreviousGameStatus] = useState<'playing' | 'won' | 'lost'>('playing');
 
@@ -59,6 +61,19 @@ export const WordleGame: React.FC = () => {
   const handleCloseModal = () => {
     setShowModal(false);
   };
+
+  // Tocar música de fundo quando o jogo inicia
+  useEffect(() => {
+    // Aguardar um pouco para garantir que os sons estejam carregados
+    const timer = setTimeout(() => {
+      playBackgroundMusic();
+    }, 1000);
+    
+    return () => {
+      clearTimeout(timer);
+      stopBackgroundMusic();
+    };
+  }, [playBackgroundMusic, stopBackgroundMusic]);
 
   // Mostrar modal quando o jogo termina
   useEffect(() => {
