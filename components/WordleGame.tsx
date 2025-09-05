@@ -7,7 +7,12 @@ import { GameBoard } from './GameBoard';
 import { GameModal } from './GameModal';
 import { VirtualKeyboard } from './VirtualKeyboard';
 
-export const WordleGame: React.FC = () => {
+interface WordleGameProps {
+  onGoHome: () => void;
+  onGameFinish?: () => void;
+}
+
+const WordleGame: React.FC<WordleGameProps> = ({ onGoHome, onGameFinish }) => {
   const { gameState, addLetter, removeLetter, submitGuess, resetGame } = useWordleGame();
   const { playBackgroundMusic, stopBackgroundMusic } = useSounds();
   const [showModal, setShowModal] = useState(false);
@@ -60,6 +65,11 @@ export const WordleGame: React.FC = () => {
 
   const handleCloseModal = () => {
     setShowModal(false);
+  };
+
+  const handleGoHome = () => {
+    setShowModal(false);
+    onGoHome();
   };
 
   // Tocar música de fundo quando o jogo inicia
@@ -125,6 +135,7 @@ export const WordleGame: React.FC = () => {
         attempts={getAttempts()}
         onClose={handleCloseModal}
         onPlayAgain={handleReset}
+        onGoHome={handleGoHome}
       />
     </View>
   );
@@ -160,3 +171,5 @@ const styles = StyleSheet.create({
     opacity: 0.9,
   },
 });
+
+export default WordleGame;

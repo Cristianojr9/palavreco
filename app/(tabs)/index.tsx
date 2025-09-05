@@ -1,11 +1,6 @@
-import { WordleGame } from '@/components/WordleGame';
+import AppNavigator from '../../components/AppNavigator';
 import React from 'react';
-import { StyleSheet } from 'react-native';
 
 export default function HomeScreen() {
-  return <WordleGame />;
+  return <AppNavigator />;
 }
-
-const styles = StyleSheet.create({
-  // Estilos removidos pois não são mais necessários
-});

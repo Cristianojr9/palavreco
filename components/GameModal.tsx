@@ -8,6 +8,7 @@ interface GameModalProps {
   attempts: number;
   onClose: () => void;
   onPlayAgain: () => void;
+  onGoHome: () => void;
 }
 
 export const GameModal: React.FC<GameModalProps> = ({
@@ -17,6 +18,7 @@ export const GameModal: React.FC<GameModalProps> = ({
   attempts,
   onClose,
   onPlayAgain,
+  onGoHome,
 }) => {
   const getTitle = () => {
     switch (gameStatus) {
@@ -67,8 +69,8 @@ export const GameModal: React.FC<GameModalProps> = ({
             <TouchableOpacity style={styles.button} onPress={onPlayAgain}>
               <Text style={styles.buttonText}>Jogar Novamente</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={[styles.button, styles.secondaryButton]} onPress={onClose}>
-              <Text style={[styles.buttonText, styles.secondaryButtonText]}>Fechar</Text>
+            <TouchableOpacity style={[styles.button, styles.secondaryButton]} onPress={onGoHome}>
+              <Text style={[styles.buttonText, styles.secondaryButtonText]}>Menu Principal</Text>
             </TouchableOpacity>
           </View>
         </View>
