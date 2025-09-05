@@ -125,7 +125,13 @@ export default function StatsScreen({ visible, onClose }: StatsScreenProps) {
             </TouchableOpacity>
           </View>
 
-          <ScrollView style={styles.content} showsVerticalScrollIndicator={false}>
+          <ScrollView 
+            style={styles.content} 
+            showsVerticalScrollIndicator={true}
+            contentContainerStyle={styles.scrollContent}
+            bounces={true}
+            alwaysBounceVertical={false}
+          >
             {/* Main Stats */}
             <View style={styles.section}>
               <View style={styles.statsGrid}>
@@ -166,7 +172,7 @@ export default function StatsScreen({ visible, onClose }: StatsScreenProps) {
             </View>
 
             {/* Guess Distribution */}
-            <View style={styles.section}>
+            {/* <View style={styles.section}>
               <Text style={styles.sectionTitle}>Distribuição de Tentativas</Text>
               <View style={styles.distributionContainer}>
                 {stats.guessDistribution.map((count, index) => (
@@ -191,7 +197,7 @@ export default function StatsScreen({ visible, onClose }: StatsScreenProps) {
                   </View>
                 ))}
               </View>
-            </View>
+            </View> */}
 
             {/* Empty State */}
             {stats.gamesPlayed === 0 && (
@@ -205,7 +211,7 @@ export default function StatsScreen({ visible, onClose }: StatsScreenProps) {
             )}
 
             {/* Action Buttons */}
-            <View style={styles.section}>
+            {/* <View style={styles.section}>
               <TouchableOpacity
                 style={styles.actionButton}
                 onPress={() => {}}
@@ -223,7 +229,7 @@ export default function StatsScreen({ visible, onClose }: StatsScreenProps) {
                   Resetar Estatísticas
                 </Text>
               </TouchableOpacity>
-            </View>
+            </View> */}
           </ScrollView>
         </Animated.View>
       </TouchableOpacity>
@@ -242,7 +248,7 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
     maxHeight: height * 0.9,
-    minHeight: height * 0.6,
+    minHeight: height * 0.65,
   },
   header: {
     flexDirection: 'row',
@@ -273,11 +279,15 @@ const styles = StyleSheet.create({
   },
   content: {
     flex: 1,
-    paddingHorizontal: 24,
     marginTop: 16,
   },
+  scrollContent: {
+    paddingHorizontal: 24,
+    paddingBottom: 40,
+    flexGrow: 1,
+  },
   section: {
-    marginBottom: 16,
+    marginBottom: 24,
   },
   sectionTitle: {
     fontSize: 16,

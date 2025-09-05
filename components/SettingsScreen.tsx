@@ -1,3 +1,4 @@
+import * as Linking from 'expo-linking';
 import React, { useEffect, useRef, useState } from 'react';
 import {
   Animated,
@@ -75,16 +76,28 @@ export default function SettingsScreen({ visible, onClose }: SettingsScreenProps
     });
   };
 
+  const handlePrivacyPolicy = async () => {
+    try {
+      await Linking.openURL('https://docs.google.com/document/d/e/2PACX-1vQRqkvvLXh6YTCx-6XwWgFKpi-9OBhPQ3-XGe8V0RoqfE-IFwKzjrI_J_mJoJ1SUO_rpD5MIbCK1Z4s/pub');
+    } catch (error) {
+      console.error('Erro ao abrir política de privacidade:', error);
+      // Fallback para o arquivo local se a URL não funcionar
+      await Linking.openURL('https://github.com/cristianojr9/palavreco/blob/main/PRIVACY_POLICY.md');
+    }
+  };
+
   const SettingItem = ({ 
     icon, 
     title, 
     rightComponent, 
-    onPress 
+    onPress,
+    isLink = false
   }: {
     icon: string;
     title: string;
     rightComponent?: React.ReactNode;
     onPress?: () => void;
+    isLink?: boolean;
   }) => (
     <TouchableOpacity
       style={styles.settingItem}
@@ -95,7 +108,7 @@ export default function SettingsScreen({ visible, onClose }: SettingsScreenProps
         <View style={styles.settingIcon}>
           <Text style={styles.settingIconText}>{icon}</Text>
         </View>
-        <Text style={styles.settingTitle}>{title}</Text>
+        <Text style={isLink ? styles.linkTitle : styles.settingTitle}>{title}</Text>
       </View>
       {rightComponent}
     </TouchableOpacity>
@@ -229,7 +242,8 @@ export default function SettingsScreen({ visible, onClose }: SettingsScreenProps
               <SettingItem
                 icon="📄"
                 title="Política de Privacidade"
-                onPress={() => {}}
+                onPress={handlePrivacyPolicy}
+                isLink={true}
               />
             </View>
           </ScrollView>
@@ -284,7 +298,8 @@ const styles = StyleSheet.create({
     paddingHorizontal: 24,
   },
   section: {
-    marginBottom: 32,
+    marginBottom: 16,
+    marginTop: 16,
   },
   sectionTitle: {
     fontSize: 16,
@@ -345,6 +360,11 @@ const styles = StyleSheet.create({
   settingTitle: {
     fontSize: 16,
     color: '#ffffff',
+    flex: 1,
+  },
+  linkTitle: {
+    fontSize: 16,
+    color: '#538d4e',
     flex: 1,
   },
 });
