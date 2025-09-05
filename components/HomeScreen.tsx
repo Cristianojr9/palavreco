@@ -1,13 +1,14 @@
 import React, { useEffect, useRef } from 'react';
 import {
-    Animated,
-    Dimensions,
-    StatusBar,
-    StyleSheet,
-    Text,
-    TouchableOpacity,
-    View
+  Animated,
+  Dimensions,
+  StatusBar,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View
 } from 'react-native';
+import Logo from './Logo';
 
 const { width, height } = Dimensions.get('window');
 
@@ -58,10 +59,7 @@ export default function HomeScreen({ onStartGame, onOpenSettings, onOpenStats }:
         ]}
       >
         <View style={styles.logoContainer}>
-          <View style={styles.logo}>
-            <Text style={styles.logoText}>P</Text>
-          </View>
-          <Text style={styles.title}>PALAVRECO</Text>
+          <Logo size="medium" showText={false} />
         </View>
         <Text style={styles.subtitle}>Descubra a palavra do dia</Text>
       </Animated.View>
@@ -88,14 +86,6 @@ export default function HomeScreen({ onStartGame, onOpenSettings, onOpenStats }:
           <Text style={styles.playButtonText}>JOGAR</Text>
         </TouchableOpacity>
 
-        {/* Game Mode Button */}
-        <TouchableOpacity
-          style={styles.modeButton}
-          onPress={onStartGame}
-          activeOpacity={0.8}
-        >
-          <Text style={styles.modeButtonText}>5 LETRAS</Text>
-        </TouchableOpacity>
 
         {/* How to Play */}
         <View style={styles.howToPlay}>
@@ -167,33 +157,12 @@ const styles = StyleSheet.create({
   header: {
     alignItems: 'center',
     paddingTop: 60,
-    paddingBottom: 40,
+    marginTop: 100,
+    // paddingBottom: 40,
   },
   logoContainer: {
     alignItems: 'center',
     marginBottom: 20,
-  },
-  logo: {
-    width: 80,
-    height: 80,
-    borderRadius: 40,
-    backgroundColor: '#538d4e',
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginBottom: 16,
-    shadowColor: '#538d4e',
-    shadowOffset: {
-      width: 0,
-      height: 4,
-    },
-    shadowOpacity: 0.3,
-    shadowRadius: 8,
-    elevation: 4,
-  },
-  logoText: {
-    fontSize: 32,
-    fontWeight: 'bold',
-    color: '#ffffff',
   },
   title: {
     fontSize: 28,

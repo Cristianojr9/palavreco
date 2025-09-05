@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import { Animated, Dimensions, StyleSheet, Text, View } from 'react-native';
+import Logo from './Logo';
 
 const { width, height } = Dimensions.get('window');
 
@@ -52,9 +53,9 @@ export default function SplashScreen({ onFinish }: SplashScreenProps) {
     outputRange: [0.5, 1],
   });
 
-  const logoRotate = logoAnim.interpolate({
-    inputRange: [0, 1],
-    outputRange: ['0deg', '360deg'],
+  const logoFade = logoAnim.interpolate({
+    inputRange: [0, 0.5, 1],
+    outputRange: [0, 0.8, 1],
   });
 
   return (
@@ -67,14 +68,11 @@ export default function SplashScreen({ onFinish }: SplashScreenProps) {
             transform: [
               { scale: scaleAnim },
               { scale: logoScale },
-              { rotate: logoRotate },
             ],
           },
         ]}
       >
-        <View style={styles.logo}>
-          <Text style={styles.logoText}>P</Text>
-        </View>
+        <Logo size="large" showText={false} />
         <Text style={styles.title}>PALAVRECO</Text>
         <Text style={styles.subtitle}>Descubra a palavra do dia</Text>
       </Animated.View>
@@ -119,28 +117,6 @@ const styles = StyleSheet.create({
   logoContainer: {
     alignItems: 'center',
     marginBottom: 60,
-  },
-  logo: {
-    width: 120,
-    height: 120,
-    borderRadius: 60,
-    backgroundColor: '#538d4e',
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginBottom: 20,
-    shadowColor: '#538d4e',
-    shadowOffset: {
-      width: 0,
-      height: 8,
-    },
-    shadowOpacity: 0.3,
-    shadowRadius: 16,
-    elevation: 8,
-  },
-  logoText: {
-    fontSize: 48,
-    fontWeight: 'bold',
-    color: '#ffffff',
   },
   title: {
     fontSize: 32,

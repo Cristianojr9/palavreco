@@ -1,18 +1,17 @@
 import React, { useEffect, useRef, useState } from 'react';
 import {
-    Animated,
-    Dimensions,
-    Modal,
-    ScrollView,
-    StatusBar,
-    StyleSheet,
-    Switch,
-    Text,
-    TouchableOpacity,
-    View
+  Animated,
+  Dimensions,
+  Modal,
+  ScrollView,
+  StatusBar,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View
 } from 'react-native';
 
-const { width, height } = Dimensions.get('window');
+const { height } = Dimensions.get('window');
 
 interface SettingsScreenProps {
   visible: boolean;
@@ -27,8 +26,6 @@ export default function SettingsScreen({ visible, onClose }: SettingsScreenProps
   const [soundEnabled, setSoundEnabled] = useState(true);
   const [musicEnabled, setMusicEnabled] = useState(true);
   const [hapticsEnabled, setHapticsEnabled] = useState(true);
-  const [darkMode, setDarkMode] = useState(true);
-  const [colorBlindMode, setColorBlindMode] = useState(false);
   const [notifications, setNotifications] = useState(true);
 
   useEffect(() => {
@@ -141,7 +138,7 @@ export default function SettingsScreen({ visible, onClose }: SettingsScreenProps
 
           <ScrollView style={styles.content} showsVerticalScrollIndicator={false}>
             {/* Quick Actions */}
-            <View style={styles.section}>
+            {/* <View style={styles.section}>
               <View style={styles.quickActions}>
                 <TouchableOpacity
                   style={[styles.quickAction, soundEnabled && styles.quickActionActive]}
@@ -179,54 +176,10 @@ export default function SettingsScreen({ visible, onClose }: SettingsScreenProps
                   <Text style={styles.quickActionText}>Notificações</Text>
                 </TouchableOpacity>
               </View>
-            </View>
-
-            {/* General Settings */}
-            <View style={styles.section}>
-              <Text style={styles.sectionTitle}>Geral</Text>
-              
-              <SettingItem
-                icon="🌙"
-                title="Modo Escuro"
-                rightComponent={
-                  <Switch
-                    value={darkMode}
-                    onValueChange={setDarkMode}
-                    trackColor={{ false: '#3a3a3c', true: '#538d4e' }}
-                    thumbColor={darkMode ? '#ffffff' : '#818384'}
-                  />
-                }
-              />
-              
-              <SettingItem
-                icon="🎨"
-                title="Modo Daltônico"
-                rightComponent={
-                  <Switch
-                    value={colorBlindMode}
-                    onValueChange={setColorBlindMode}
-                    trackColor={{ false: '#3a3a3c', true: '#538d4e' }}
-                    thumbColor={colorBlindMode ? '#ffffff' : '#818384'}
-                  />
-                }
-              />
-              
-              <SettingItem
-                icon="🔔"
-                title="Notificações"
-                rightComponent={
-                  <Switch
-                    value={notifications}
-                    onValueChange={setNotifications}
-                    trackColor={{ false: '#3a3a3c', true: '#538d4e' }}
-                    thumbColor={notifications ? '#ffffff' : '#818384'}
-                  />
-                }
-              />
-            </View>
+            </View> */}
 
             {/* Game Settings */}
-            <View style={styles.section}>
+            {/* <View style={styles.section}>
               <Text style={styles.sectionTitle}>Jogo</Text>
               
               <SettingItem
@@ -267,23 +220,11 @@ export default function SettingsScreen({ visible, onClose }: SettingsScreenProps
                   />
                 }
               />
-            </View>
+            </View> */}
 
             {/* Other Options */}
             <View style={styles.section}>
               <Text style={styles.sectionTitle}>Outros</Text>
-              
-              <SettingItem
-                icon="ℹ️"
-                title="Sobre o Jogo"
-                onPress={() => {}}
-              />
-              
-              <SettingItem
-                icon="📧"
-                title="Contato"
-                onPress={() => {}}
-              />
               
               <SettingItem
                 icon="📄"

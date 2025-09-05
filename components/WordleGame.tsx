@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { Alert, StyleSheet, Text, View } from 'react-native';
+import { Alert, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { isValidWord } from '../data/words';
 import { useSounds } from '../hooks/useSounds';
+import { useStats } from '../hooks/useStats';
 import { useWordleGame } from '../hooks/useWordleGame';
 import { GameBoard } from './GameBoard';
 import { GameModal } from './GameModal';
@@ -15,6 +16,7 @@ interface WordleGameProps {
 const WordleGame: React.FC<WordleGameProps> = ({ onGoHome, onGameFinish }) => {
   const { gameState, addLetter, removeLetter, submitGuess, resetGame } = useWordleGame();
   const { playBackgroundMusic, stopBackgroundMusic } = useSounds();
+  const { recordGame } = useStats();
   const [showModal, setShowModal] = useState(false);
   const [previousGameStatus, setPreviousGameStatus] = useState<'playing' | 'won' | 'lost'>('playing');
 
@@ -44,7 +46,7 @@ const WordleGame: React.FC<WordleGameProps> = ({ onGoHome, onGameFinish }) => {
     }
     
     if (!isValidWord(gameState.currentGuess)) {
-      Alert.alert('Palavra inválida', 'Esta palavra não existe no dicionário!');
+      // Apenas feedback tátil, sem alerta
       return;
     }
     
@@ -61,6 +63,7 @@ const WordleGame: React.FC<WordleGameProps> = ({ onGoHome, onGameFinish }) => {
   const handleReset = () => {
     resetGame();
     setShowModal(false);
+    setPreviousGameStatus('playing'); // Reset para permitir modal na próxima partida
   };
 
   const handleCloseModal = () => {
@@ -90,8 +93,15 @@ const WordleGame: React.FC<WordleGameProps> = ({ onGoHome, onGameFinish }) => {
     if (gameState.gameStatus !== 'playing' && gameState.gameStatus !== previousGameStatus) {
       setShowModal(true);
       setPreviousGameStatus(gameState.gameStatus);
+      
+      // Registrar estatísticas
+      if (gameState.gameStatus === 'won' || gameState.gameStatus === 'lost') {
+        const won = gameState.gameStatus === 'won';
+        const attempts = gameState.currentRow + 1; // +1 porque currentRow é 0-based
+        recordGame(won, attempts);
+      }
     }
-  }, [gameState.gameStatus, previousGameStatus]);
+  }, [gameState.gameStatus, previousGameStatus, recordGame]);
 
   const getGameMessage = () => {
     switch (gameState.gameStatus) {
@@ -111,8 +121,19 @@ const WordleGame: React.FC<WordleGameProps> = ({ onGoHome, onGameFinish }) => {
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <Text style={styles.title}>PALAVRECO</Text>
-        <Text style={styles.subtitle}>{getGameMessage()}</Text>
+        <TouchableOpacity
+          style={styles.backButton}
+          onPress={onGoHome}
+          activeOpacity={0.7}
+        >
+          <Text style={styles.backButtonText}>←</Text>
+        </TouchableOpacity>
+        <View style={styles.titleContainer}>
+          {/* <Logo size="medium" showText={false} /> */}
+          <Text style={styles.description}>Descubra a palavra do dia</Text>
+          <Text style={styles.subtitle}>{getGameMessage()}</Text>
+        </View>
+        <View style={styles.placeholder} />
       </View>
 
       <GameBoard
@@ -148,9 +169,29 @@ const styles = StyleSheet.create({
     paddingTop: 60,
   },
   header: {
+    flexDirection: 'row',
     alignItems: 'center',
+    justifyContent: 'space-between',
     marginBottom: 20,
     paddingHorizontal: 20,
+    marginTop: 40,
+  },
+  backButton: {
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+    backgroundColor: '#3a3a3c',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  backButtonText: {
+    fontSize: 20,
+    color: '#ffffff',
+    fontWeight: 'bold',
+  },
+  titleContainer: {
+    flex: 1,
+    alignItems: 'center',
   },
   title: {
     fontSize: 36,
@@ -162,13 +203,23 @@ const styles = StyleSheet.create({
     textShadowOffset: { width: 0, height: 1 },
     textShadowRadius: 2,
   },
+  description: {
+    fontSize: 14,
+    color: '#818384',
+    marginTop: 4,
+    textAlign: 'center',
+    fontFamily: 'System',
+  },
   subtitle: {
     fontSize: 18,
     color: '#ffffff',
-    marginTop: 12,
+    marginTop: 8,
     textAlign: 'center',
     fontFamily: 'System',
     opacity: 0.9,
+  },
+  placeholder: {
+    width: 40,
   },
 });
 

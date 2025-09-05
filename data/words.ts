@@ -21,7 +21,8 @@ export const WORDS_5_LETTERS = [
   'TARDE', 'TECLA', 'TEMPO', 'TERRA', 'TEXTO', 'TIGRE', 'TINTA', 'TOCAR', 'TURMA',
   'UNIDO', 'URGIR', 'UNICO', 'PORCO', 'TROCO', 'ARARA', 'UNIAO', 'GRILO', 'USADO',
   'VALOR', 'REVEZ', 'VELHO', 'VENDA', 'VERDE', 'VIDAS', 'VINHO', 'VIRAR', 'VISTA',
-  'ANEXO', 'GARFO', 'BANHO', 'VESTE', 'ZINCO', 'ZONAL', 'ZUMBI', 'ZEBRA', 'ZELAR'
+  'ANEXO', 'GARFO', 'BANHO', 'VESTE', 'ZINCO', 'ZONAL', 'ZUMBI', 'ZEBRA', 'ZELAR', 
+  'ANDAR', 'RISCO', 'MARCA', 'PORTO', 'PRETO'
 ];
 
 // Lista de palavras válidas para validação (inclui as palavras do jogo + outras válidas)

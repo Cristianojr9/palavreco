@@ -1,15 +1,16 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 import {
-    Animated,
-    Dimensions,
-    Modal,
-    ScrollView,
-    StatusBar,
-    StyleSheet,
-    Text,
-    TouchableOpacity,
-    View
+  Animated,
+  Dimensions,
+  Modal,
+  ScrollView,
+  StatusBar,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View
 } from 'react-native';
+import { useStats } from '../hooks/useStats';
 
 const { width, height } = Dimensions.get('window');
 
@@ -22,15 +23,7 @@ export default function StatsScreen({ visible, onClose }: StatsScreenProps) {
   const slideAnim = useRef(new Animated.Value(height)).current;
   const fadeAnim = useRef(new Animated.Value(0)).current;
   
-  // Mock stats data - in a real app, this would come from storage
-  const [stats] = useState({
-    gamesPlayed: 0,
-    gamesWon: 0,
-    currentStreak: 0,
-    maxStreak: 0,
-    winPercentage: 0,
-    guessDistribution: [0, 0, 0, 0, 0, 0], // 1-6 guesses
-  });
+  const { stats, loading, resetStats } = useStats();
 
   useEffect(() => {
     if (visible) {
@@ -223,7 +216,7 @@ export default function StatsScreen({ visible, onClose }: StatsScreenProps) {
               
               <TouchableOpacity
                 style={[styles.actionButton, styles.secondaryButton]}
-                onPress={() => {}}
+                onPress={resetStats}
                 activeOpacity={0.7}
               >
                 <Text style={[styles.actionButtonText, styles.secondaryButtonText]}>
@@ -281,9 +274,10 @@ const styles = StyleSheet.create({
   content: {
     flex: 1,
     paddingHorizontal: 24,
+    marginTop: 16,
   },
   section: {
-    marginBottom: 32,
+    marginBottom: 16,
   },
   sectionTitle: {
     fontSize: 16,
