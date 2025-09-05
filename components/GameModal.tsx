@@ -1,5 +1,7 @@
 import React from 'react';
-import { Modal, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Dimensions, Modal, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+
+const { width, height } = Dimensions.get('window');
 
 interface GameModalProps {
   visible: boolean;
@@ -89,41 +91,46 @@ const styles = StyleSheet.create({
   modal: {
     backgroundColor: '#2d2d2d',
     borderRadius: 16,
-    padding: 24,
-    margin: 20,
+    padding: 20,
+    margin: 16,
     alignItems: 'center',
-    minWidth: 300,
+    maxWidth: width * 0.9,
+    maxHeight: height * 0.6,
+    minWidth: 280,
   },
   title: {
-    fontSize: 28,
+    fontSize: width < 400 ? 24 : 28,
     fontWeight: 'bold',
     color: '#ffffff',
-    marginBottom: 16,
+    marginBottom: 12,
     textAlign: 'center',
   },
   message: {
-    fontSize: 16,
+    fontSize: width < 400 ? 14 : 16,
     color: '#ffffff',
     textAlign: 'center',
-    marginBottom: 16,
-    lineHeight: 22,
+    marginBottom: 12,
+    lineHeight: width < 400 ? 20 : 22,
+    paddingHorizontal: 8,
   },
   stats: {
-    fontSize: 18,
+    fontSize: width < 400 ? 16 : 18,
     color: '#ffd700',
     fontWeight: 'bold',
-    marginBottom: 24,
+    marginBottom: 20,
   },
   buttonContainer: {
-    flexDirection: 'row',
-    gap: 12,
+    flexDirection: width < 400 ? 'column' : 'row',
+    gap: width < 400 ? 8 : 12,
+    width: '100%',
   },
   button: {
     backgroundColor: '#538d4e',
-    paddingHorizontal: 20,
-    paddingVertical: 12,
+    paddingHorizontal: width < 400 ? 16 : 20,
+    paddingVertical: width < 400 ? 10 : 12,
     borderRadius: 8,
-    minWidth: 120,
+    minWidth: width < 400 ? 100 : 120,
+    flex: width < 400 ? 0 : 1,
     alignItems: 'center',
   },
   secondaryButton: {
@@ -133,7 +140,7 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     color: '#ffffff',
-    fontSize: 16,
+    fontSize: width < 400 ? 14 : 16,
     fontWeight: 'bold',
   },
   secondaryButtonText: {

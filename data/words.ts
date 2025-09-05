@@ -22,7 +22,8 @@ export const WORDS_5_LETTERS = [
   'UNIDO', 'URGIR', 'UNICO', 'PORCO', 'TROCO', 'ARARA', 'UNIAO', 'GRILO', 'USADO',
   'VALOR', 'REVEZ', 'VELHO', 'VENDA', 'VERDE', 'VIDAS', 'VINHO', 'VIRAR', 'VISTA',
   'ANEXO', 'GARFO', 'BANHO', 'VESTE', 'ZINCO', 'ZONAL', 'ZUMBI', 'ZEBRA', 'ZELAR', 
-  'ANDAR', 'RISCO', 'MARCA', 'PORTO', 'PRETO'
+  'ANDAR', 'RISCO', 'MARCA', 'PORTO', 'PRETO', 'RALAR', 'CASAR', 'CAFES', 'NUVEM', 
+  'VENDI', 'RUMOR', 'BELEM', 'FURIA', 'JULGA'
 ];
 
 // Lista de palavras válidas para validação (inclui as palavras do jogo + outras válidas)
@@ -33,7 +34,8 @@ export const VALID_WORDS = [
   'AREIA', 'GAMBA', 'PERNA', 'PONTE', 'CILIO', 'TRIGO', 'CAIXA', 'ROUPA', 'VEZES',
   'MOITA', 'PORTA', 'SAUDE', 'GOSMA', 'GOSTO', 'GESTO', 'JEITO', 'TRONO', 'CESTA', 
   'SITIO', 'CURSO', 'RINHA', 'PERNA', 'FAROL', 'TRONO', 'TRONO', 'GRILO', 'TERNO', 
-  'FEITA', 'SAUNA', 'PRATA', 'PALMA', 'PORCA', 'BANDA', 'LIMBO', 'ROSTO', 
+  'FEITA', 'SAUNA', 'PRATA', 'PALMA', 'PORCA', 'BANDA', 'LIMBO', 'ROSTO', 'PENTE',
+  'VENTA', 'VENUS', 'METAL', 'LAPIS', 'NINJA', 'BOLSA', 'LINDA', 'POSTE', 'POSTO'
 ];
 
 export const getRandomWord = (): string => {

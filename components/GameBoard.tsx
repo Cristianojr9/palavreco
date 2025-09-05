@@ -36,6 +36,13 @@ export const GameBoard: React.FC<GameBoardProps> = ({
           duration: 150,
           useNativeDriver: true,
         }).start();
+      } else if (!displayLetter && isCurrentGuess) {
+        // Voltar ao tamanho normal quando a letra for removida
+        Animated.timing(animatedValue, {
+          toValue: 0,
+          duration: 150,
+          useNativeDriver: true,
+        }).start();
       }
     }, [displayLetter, isCurrentGuess, animatedValue]);
 
@@ -91,15 +98,29 @@ export const GameBoard: React.FC<GameBoardProps> = ({
 
   return (
     <View style={styles.board}>
-      {Array.from({ length: 6 }, (_, row) => (
-        <View key={row} style={styles.row}>
-          {Array.from({ length: 5 }, (_, col) => {
-            const guess = guesses[row];
-            const letterState = guess ? guess[col] : { letter: '', status: 'empty' as const };
-            return renderCell(letterState.letter, letterState.status, row, col);
-          })}
-        </View>
-      ))}
+      {Array.from({ length: 6 }, (_, row) => {
+        const isCurrentRow = row === currentRow;
+        const isPastRow = row < currentRow;
+        const isFutureRow = row > currentRow;
+
+        return (
+          <View
+            key={row}
+            style={[
+              styles.row,
+              isCurrentRow && styles.currentRow,
+              isPastRow && styles.pastRow,
+              isFutureRow && styles.futureRow,
+            ]}
+          >
+            {Array.from({ length: 5 }, (_, col) => {
+              const guess = guesses[row];
+              const letterState = guess ? guess[col] : { letter: '', status: 'empty' as const };
+              return renderCell(letterState.letter, letterState.status, row, col);
+            })}
+          </View>
+        );
+      })}
     </View>
   );
 };
@@ -112,14 +133,13 @@ const styles = StyleSheet.create({
   },
   row: {
     flexDirection: 'row',
-    marginBottom: 6,
     gap: 6,
   },
   cell: {
     width: 50,
     height: 50,
     borderWidth: 2,
-    borderColor: '#3a3a3c',
+    borderColor: '#2a2a2a',
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#121213',
@@ -168,7 +188,45 @@ const styles = StyleSheet.create({
     borderColor: '#3a3a3c',
   },
   currentGuess: {
-    borderColor: '#565758',
+    borderColor: '#818384',
     backgroundColor: '#2d2d2d',
+    borderWidth: 3,
+  },
+  currentRow: {
+    //backgroundColor: 'rgba(83, 141, 78, 0.05)',
+    // borderWidth: 1,
+    // borderColor: 'rgba(83, 141, 78, 0.2)',
+    borderRadius: 8,
+    paddingVertical: 4,
+    paddingHorizontal: 8,
+    marginBottom: 6,
+    // shadowColor: '#538d4e',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.15,
+    shadowRadius: 4,
+    elevation: 2,
+  },
+  pastRow: {
+    backgroundColor: 'rgba(38, 38, 39, 0.05)',
+    opacity: 0.9,
+    borderWidth: 1,
+    borderColor: 'rgba(42, 42, 42, 0.3)',
+    borderRadius: 8,
+    paddingVertical: 4,
+    paddingHorizontal: 8,
+    marginBottom: 6,
+  },
+  futureRow: {
+    backgroundColor: 'rgba(38, 38, 39, 0.02)',
+    opacity: 0.6,
+    // borderWidth: 1,
+    // borderColor: 'rgba(42, 42, 42, 0.2)',
+    borderRadius: 8,
+    paddingVertical: 4,
+    paddingHorizontal: 8,
+    marginBottom: 6,
   },
 });
