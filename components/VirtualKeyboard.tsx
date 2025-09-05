@@ -45,18 +45,23 @@ export const VirtualKeyboard: React.FC<VirtualKeyboardProps> = ({
     );
   };
 
-  const renderSpecialKey = (text: string, onPress: () => void, style?: any) => (
+  const renderSpecialKey = (text: string, onPress: () => void, style?: any, textStyle?: any) => (
     <TouchableOpacity
       style={[styles.specialKey, style]}
       onPress={onPress}
       activeOpacity={0.7}
     >
-      <Text style={styles.specialKeyText}>{text}</Text>
+      <Text style={[styles.specialKeyText, textStyle]}>{text}</Text>
     </TouchableOpacity>
   );
 
   return (
     <View style={styles.keyboard}>
+      {/* Botão Enviar acima do teclado */}
+      <View style={styles.submitContainer}>
+        {renderSpecialKey('ENVIAR', onEnter, styles.submitKey, styles.submitKeyText)}
+      </View>
+      
       <View style={[styles.row, styles.topRow]}>
         {topRow.map(renderKey)}
       </View>
@@ -67,7 +72,6 @@ export const VirtualKeyboard: React.FC<VirtualKeyboardProps> = ({
       </View>
       
       <View style={[styles.row, styles.bottomRow]}>
-        {renderSpecialKey('ENTER', onEnter, styles.enterKey)}
         {bottomRow.map(renderKey)}
       </View>
     </View>
@@ -152,13 +156,37 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     fontFamily: 'System',
   },
+  submitKeyText: {
+    color: '#ffffff',
+    fontSize: 16,
+    fontWeight: 'bold',
+    fontFamily: 'System',
+  },
   backspaceKey: {
     flex: 1.5,
     maxWidth: 50,
   },
-  enterKey: {
-    flex: 2,
-    maxWidth: 80,
+  submitContainer: {
+    width: '100%',
+    alignItems: 'center',
+    marginBottom: 8,
+    paddingHorizontal: 20,
+  },
+  submitKey: {
+    backgroundColor: '#538d4e',
+    paddingVertical: 12,
+    paddingHorizontal: 24,
+    borderRadius: 8,
+    minWidth: 120,
+    height: 50,
+    shadowColor: '#538d4e',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.3,
+    shadowRadius: 4,
+    elevation: 3,
   },
   topRow: {
     marginBottom: 4,
