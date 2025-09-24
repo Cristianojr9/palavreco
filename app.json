@@ -9,7 +9,14 @@
     "userInterfaceStyle": "dark",
     "newArchEnabled": true,
     "description": "Descubra a palavra do dia! Um jogo de adivinhação de palavras em português, inspirado no Wordle. Teste seu vocabulário e divirta-se!",
-    "keywords": ["palavra", "wordle", "jogo", "português", "adivinhação", "vocabulário"],
+    "keywords": [
+      "palavra",
+      "wordle",
+      "jogo",
+      "português",
+      "adivinhação",
+      "vocabulário"
+    ],
     "privacy": "public",
     "category": "games",
     "ios": {
@@ -50,6 +57,12 @@
     ],
     "experiments": {
       "typedRoutes": true
+    },
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "7f3ade57-4c71-450a-91ba-859ca6d3a6cd"
+      }
     }
   }
 }
